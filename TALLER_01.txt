@@ -33,7 +33,7 @@ CREATE TABLE category (
 
 #base de videojuegos
 
-CREATE DATABSE Gamer; 
+CREATE DATABASE Gamer; 
 
 use Gamer
 
