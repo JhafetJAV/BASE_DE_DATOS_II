@@ -1,0 +1,93 @@
+#tablas de la imagen del modulo 2
+
+CREATE TABLE Orders (
+    id INT PRIMARY KEY,
+);
+
+CREATE TABLE order_line (
+    id INT PRIMARY KEY,
+    quantity INT,
+);
+
+CREATE TABLE product (
+    id INT PRIMARY KEY,
+    name VARCHAR(255),
+    price DECIMAL(10, 2)
+);
+
+CREATE TABLE food (
+    id INT PRIMARY KEY,
+    expiration_date DATE,
+    calories INT
+);
+
+CREATE TABLE furniture (
+    id INT PRIMARY KEY,
+    manufacture_date DATE
+);
+CREATE TABLE category (
+    id INT PRIMARY KEY,
+    date_created DATE
+);
+
+
+#base de videojuegos
+
+CREATE DATABSE Gamer; 
+
+use Gamer
+
+CREATE TABLE login (
+    id INT PRIMARY KEY,
+    name VARCHAR(255),
+	contra VARCHAR(255),
+	correo VARCHAR(255),
+);
+
+
+CREATE TABLE progreso (
+    id INT PRIMARY KEY,
+    fechaINI INT,
+	fechaFIN INT,
+	guardado INT,
+);
+
+CREATE TABLE juego (
+    id INT PRIMARY KEY,
+    consola VARCHAR(255),
+	genero VARCHAR(255),
+	duracion INT,
+	calificacion INT,
+);
+
+CREATE TABLE compania (
+    id INT PRIMARY KEY,
+    nombre VARCHAR(255),
+);
+
+
+#DML y DDL
+
+-- Seleccionar todos las compañia de la tabla
+SELECT * FROM compania;
+
+-- Insertar un juego con ID 1, disponible para la consola xbox y categoria de accion
+INSERT INTO juego (id, consola, genero)
+VALUES (1, xbox, accion);
+
+-- Actualizar la calificacion del juego con id 2
+UPDATE juego
+SET calificacion = 5
+WHERE id = 2;
+
+-- Insertar en la tabla juego con id 5, duracion de 1 hora y calificacin de 5 estrellas
+INSERT INTO juego (id, duracion, calificacion)
+VALUES (5, 1, 5);
+
+-- Insertar en la tabla juego id 6 y duracion de 10 horas
+INSERT INTO juego (id, duracion)
+VALUES (2, 10);
+
+-- Eliminar del login el id 3
+DELETE FROM login
+WHERE id = 3;
