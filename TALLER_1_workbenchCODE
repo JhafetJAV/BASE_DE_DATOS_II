@@ -1,0 +1,35 @@
+CREATE DATABASE Gamer;
+USE Gamer;
+
+CREATE TABLE login (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    contra VARCHAR(255) NOT NULL,
+    correo VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE compania (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE juego (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    compania_id INT,
+    consola VARCHAR(255) NOT NULL,
+    genero VARCHAR(255) NOT NULL,
+    duracion INT NOT NULL,
+    calificacion INT NOT NULL,
+    FOREIGN KEY (compania_id) REFERENCES compania(id)
+);
+
+CREATE TABLE progreso (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    login_id INT,
+    juego_id INT,
+    fechaINI INT NOT NULL,
+    fechaFIN INT NOT NULL,
+    guardado INT NOT NULL,
+    FOREIGN KEY (login_id) REFERENCES login(id),
+    FOREIGN KEY (juego_id) REFERENCES juego(id)
+);
