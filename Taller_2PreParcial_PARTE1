@@ -1,0 +1,87 @@
+CREATE DATABASE CARTERA_ELECTRONICA;
+USE CARTERA_ELECTRONICA;
+
+
+CREATE TABLE user (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    salt INT NOT NULL,
+    balance DECIMAL(10,2) NOT NULL
+);
+
+INSERT INTO user (user_id, name, password, salt, balance) VALUES
+(16,'Usuario6', 'yyyyyy6', 24680, 950.00),
+(17,'Usuario7', 'aaaaaa7', 13579, 600.50),
+(18,'Usuario8', 'zzzzzz8', 12321, 400.25),
+(19,'Usuario1', 'pppppp9', 98765, 1200.75),
+(20,'Usuario2', 'rrrrrr10', 56789, 700.00),
+(21,'Usuario11', 'dddddd11', 54321, 300.50),
+(22,'Usuario7', 'ooooo12', 12345, 150.25),
+(23,'Usuario13', 'uuuuuu13', 67890, 850.75);
+
+
+CREATE TABLE transaction (
+    request_id INT AUTO_INCREMENT PRIMARY KEY,
+    from_id INT NOT NULL,
+    to_id INT NOT NULL,
+    amount DECIMAL(10,2) NOT NULL,
+    reason VARCHAR(255) NOT NULL,
+    status VARCHAR(50) NOT NULL,
+    timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    category VARCHAR(50) NOT NULL,
+    FOREIGN KEY (from_id) REFERENCES user(user_id),
+    FOREIGN KEY (to_id) REFERENCES user(user_id)
+);
+
+INSERT INTO transaction (request_id, from_id, to_id, amount, reason, status, category) VALUES
+(16,3, 4, 120.00, 'Pago por suscripción', 'completed', 'send'),
+(17,4, 3, 90.00, 'Pago de alquiler', 'pending', 'request'),
+(18,1, 4, 60.00, 'Donación', 'completed', 'send'),
+(19,4, 2, 45.00, 'Compra de productos', 'pending', 'request'),
+(20,2, 4, 110.00, 'Pago de servicios', 'completed', 'send'),
+(21,4, 1, 130.00, 'Pago de préstamo', 'pending', 'request'),
+(22,1, 3, 70.00, 'Compra en tienda', 'completed', 'send'),
+(23,3, 2, 85.00, 'Reembolso', 'completed', 'request');
+
+
+CREATE TABLE contact (
+    user_id INT NOT NULL,
+    friend_id INT NOT NULL,
+    PRIMARY KEY (user_id, friend_id),
+    FOREIGN KEY (user_id) REFERENCES user(user_id),
+    FOREIGN KEY (friend_id) REFERENCES user(user_id)
+);
+
+
+INSERT INTO contact (user_id, friend_id) VALUES
+(16, 17),
+(17, 18),
+(18, 19),
+(19, 20),
+(20, 21),
+(21, 22),
+(22, 23),
+(23, 16);
+
+
+CREATE TABLE user_details (
+    account_no INT AUTO_INCREMENT PRIMARY KEY,
+    type VARCHAR(255) NOT NULL,
+    phone VARCHAR(255) NOT NULL,
+    aadhar_doc VARCHAR(255) NOT NULL,
+    image VARCHAR(255) NOT NULL,
+    user_id INT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES user(user_id)
+);
+
+
+INSERT INTO user_details (type, phone, aadhar_doc, image, user_id) VALUES
+('Tipo6', '444444444', 'aadhar_doc_6.jpg', 'image_6.jpg', 16),
+('Tipo7', '555555555', 'aadhar_doc_7.jpg', 'image_7.jpg', 17),
+('Tipo8', '666666666', 'aadhar_doc_8.jpg', 'image_8.jpg', 18),
+('Tipo9', '777777777', 'aadhar_doc_9.jpg', 'image_9.jpg', 19),
+('Tipo10', '888888888', 'aadhar_doc_10.jpg', 'image_10.jpg', 20),
+('Tipo11', '999999999', 'aadhar_doc_11.jpg', 'image_11.jpg', 21),
+('Tipo12', '000000000', 'aadhar_doc_12.jpg', 'image_12.jpg', 22),
+('Tipo13', '111222333', 'aadhar_doc_13.jpg', 'image_13.jpg', 23);
