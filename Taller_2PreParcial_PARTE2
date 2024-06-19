@@ -1,0 +1,88 @@
+create schema if not exists seguros;
+use seguros;
+
+CREATE TABLE IF NOT EXISTS Usuario (
+  id_Usuario INT NOT NULL AUTO_INCREMENT,
+  Username VARCHAR(45) NOT NULL,
+  passwords VARCHAR(45) NOT NULL,
+  nombre VARCHAR(45) NOT NULL,
+  PRIMARY KEY (id_Usuario));
+  
+INSERT INTO Usuario (id_Usuario, Username, passwords, nombre) VALUES
+( 10,'user1', 'contraseña1', 'Nombre1'),
+( 20,'user2', 'contraseña2', 'Nombre2'),
+( 30,'user3', 'contraseña3', 'Nombre3'),
+( 40,'user4', 'contraseña4', 'Nombre4'),
+( 50,'user5', 'contraseña5', 'Nombre5');
+
+CREATE TABLE IF NOT EXISTS Juzgado (
+  id_Juzgado INT NOT NULL AUTO_INCREMENT,
+  nombre VARCHAR(45) NOT NULL,
+  lugar VARCHAR(45) NOT NULL,
+  PRIMARY KEY (id_Juzgado));
+
+insert into Juzgado (id_Juzgado, nombre, lugar) values
+( 11,'Tribunal Superior de Justicia de Panamá', 'Ciudad de Panamá'),
+( 12,'Tribunal Electoral de Panamá', 'Ciudad de Panamá'),
+( 13,'Tribunal de Circuito de David', 'David'),
+( 14,'Tribunal de Juicio Oral de Chitré', 'Chitré'),
+( 15,'Juzgado Municipal de Santiago', 'Santiago');
+
+CREATE TABLE IF NOT EXISTS Aseguradora (
+  id_Aseguradora INT NOT NULL AUTO_INCREMENT,
+  nombre VARCHAR(45) NOT NULL,
+  PRIMARY KEY (id_Aseguradora));
+  
+INSERT INTO Aseguradora (id,nombre) VALUES
+(64,'Mapfre Panamá'),
+(65,'Assa Compañía de Seguros'),
+(66,'Pan American Life Insurance'),
+(67,'Assicurazioni Generali Panamá'),
+(68,'Banco General Seguros');
+  
+  
+CREATE TABLE Proceso (
+    id_Proceso INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL
+);
+  
+INSERT INTO Proceso (id_Proceso,nombre) VALUES
+( 111,'Accidente de carro'),
+( 112,'Renovación de póliza'),
+( 113,'Modificación de datos del seguro'),
+( 114,'Cotización de seguro de Salud'),
+( 115,'Reclamación por choque');
+
+CREATE TABLE IF NOT EXISTS Estado (
+  id_estado INT NOT NULL AUTO_INCREMENT,
+  Statuss VARCHAR(45) NOT NULL,
+  PRIMARY KEY (id_estado));
+  
+INSERT INTO Estado (id_estado,Statuss) VALUES
+( 1111,'En Curso'),
+( 1112,'Pendiente'),
+( 1113,'Cerrados');
+
+CREATE TABLE IF NOT EXISTS Expediente (
+  id_Expediente INT NOT NULL AUTO_INCREMENT,
+  Fecha timestamp default current_timestamp,
+  Usuario_id INT NULL,
+  Proceso_id INT NOT NULL,
+  No_Caso INT NOT NULL,
+  conductor varchar(45),
+  Juzgado_id INT NULL,
+  aseguradora_id INT NULL,
+  estado_id INT NULL,
+  Primary key (id_Expediente));
+  
+INSERT INTO Expediente (Usuario_id, Proceso_id, id_Expediente, No_Caso, conductor, Juzgado_id, aseguradora_id, estado_id) VALUES
+(156,115, 1001, '2001', 'Juan Pérez',11,64,1113),
+(157,111, 1002, '2002', 'María Rodríguez',15,64,1111),
+(158,111, 1003, '2003', 'Pedro López',13,68,1111),
+(159,114, 1004, '2004', 'Ana Martínez',12,68,1112),
+(160,113, 1005, '2005', 'Laura García',11,67,1113),
+(161,112, 1006, '2006', 'Roberto Gómez',11,68,1113),
+(162,115, 1007, '2007', 'Sara Fernández',14,65,1113),
+(163,112, 1008, '2008', 'Carlos Sánchez',15,66,1111),
+(164,114, 1009, '2009', 'Luisa González',15,64,1112),
+(165,113, 1010, '2010', 'Diego Martín',12,68,1112);
