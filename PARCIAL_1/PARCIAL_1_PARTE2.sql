@@ -40,7 +40,28 @@ INSERT INTO `usuarios` VALUES
 (20,'Hester Sanford','Mayer','beer.orland','9601829a-d97a-309a-8455-4270c38ae70a','ut','918 Abshire Street\nJosefatown, MT 01813-8846','F','DIVORCIADO','PRIVADA','567 Spinka Expressway Suite 084\nLuluside, AK 54975-8310');
 
 
+CREATE TABLE tipo_usuarios(
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    tipo_usuario VARCHAR(50) NOT NULL UNIQUE
+);
 
+INSERT INTO tipo_usuarios(tipo_usuario) VALUES
+('Cliente'),
+('Administrador'),
+('Vendedor'),
+('Ejecutivo');
+
+CREATE TABLE usuarios_tipos_usuarios(
+    usuario_id BIGINT,
+    tipo_usuario_id BIGINT,
+    CONSTRAINT usuarios_tipos_usuarios PRIMARY KEY(usuario_id,tipo_usuario_id)
+);
+
+INSERT INTO usuarios_tipos_usuarios VALUES
+(1,3), (2,1), (3,4), (4,1), (5,2),
+(6,3), (7,2), (8,1), (9,3), (10,1),
+(11,4), (12,3), (13,2), (14,1), (15,1),
+(16,4), (17,3), (18,2), (19,3), (20,1);
 
 CREATE TABLE metodos_pago(
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
